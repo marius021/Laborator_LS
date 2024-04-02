@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 import pandas as pd
+from sklearn.impute import KNNImputer
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+from pyod.models.knn import KNN
 
 app = FastAPI()
 
@@ -15,7 +17,7 @@ def load_train_model():
     neigh = KNeighborsClassifier(n_neighbors=len(np.unique(df['Y'])))
     neigh.fit(df[df.columns[:4]].values.tolist(), df['Y'])
     global clf
-    clf = KNN()
+    clf = KNNImputer()
     clf.fit(df[df.columns[:4]].values.tolist(), df['Y'])
     print("Training done!")
 
